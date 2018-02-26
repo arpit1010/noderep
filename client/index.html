@@ -1,0 +1,58 @@
+<html ng-app="paymentsApp">
+
+  <head>
+    <script data-require="angular.js@1.5.6" data-semver="1.5.6" src="https://code.angularjs.org/1.5.6/angular.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="application">
+      <div class="title-bar">
+        <h1 id="paymentsApp-title">Payments-o-matic</h1>
+      </div>
+      <div class="container" ng-controller="PaymentsController">
+        <div class="list">
+          <div ng-repeat="payment in payments" ng-class="{'showHighlighted':payment.isSelected}" ng-click="setSelectedPayment(payment.id)" id="paymentsApp-list-{{$index}}">
+            <div>{{payment.counterparty}}</div>
+            <div>{{payment.valueDate | date: 'dd/mm/yyyy'}}</div>
+          </div>
+        </div>
+        <div ng-if="!hideCreateButton" class="margin10">
+          <button id="paymentsApp-btn-new" ng-click="createNewPayment()">Create new payment</button>
+        </div>
+        <div ng-if="showDetailForm"class="details " ng-form="paymentform" id="paymentsApp-detailsForm">
+          <div class=" leftfloatdiv">
+            <div class="margin10 ">
+              <label>Counterparty</label>
+              <input style="margin-left:50px;" id="paymentsApp-inpt-cpty" required maxlength="50" ng-model="selectedPayment.counterparty" />
+            </div>
+            <div class="margin10 ">
+              <label>Value Date</label>
+              <input style="margin-left:68px;"  id="paymentsApp-inpt-date" required ng-model="selectedPayment.valueDate" />
+            </div>
+            <div class="margin10 ">
+              <label>Credit Account</label>
+              <input style="margin-left:40px;" ng-pattern="/^[0-9]{8}$/" maxlength='8'  required id="paymentsApp-inpt-acc" ng-model="selectedPayment.creditAccount"/>
+            </div>
+            <div class="margin10 ">
+              <label>Amount</label>
+              <input style="margin-left:85px;"  required id="paymentsApp-inpt-amt"  ng-model="selectedPayment.amount"/>
+            </div>
+            <div class="margin10 ">
+              <label>Currency</label>
+              <input style="margin-left:80px;" required ng-pattern="/^[a-zA-Z]{3}$/" maxlength="3" id="paymentsApp-inpt-cur" ng-model="selectedPayment.currency" />
+            </div>
+            <div class="margin10 ">
+              <button ng-if="isNewPayment" ng-disabled="paymentform.$invalid" class="" id="paymentsApp-btn-save" ng-click="savePayment('new')">Save</button>
+              <button ng-if="!isNewPayment" ng-disabled="paymentform.$invalid"  class="" id="paymentsApp-btn-save" ng-click="savePayment('update')">Save</button>
+              <button id="paymentsApp-btn-cancel" ng-click="cancelPayment()">Cancel</button>
+              <button ng-if="!isNewPayment" class="" id="paymentsApp-btn-delete" ng-click="deletePayment(selectedPayment.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

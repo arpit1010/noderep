@@ -1,0 +1,15 @@
+{
+  "name": "node-angular-assessment",
+  "version": "1.0.0",
+  "description": "Assessment on Nodejs and AngularJS",
+  "main": "server/index.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sanket  Bajoria",
+  "license": "MIT"
+}
