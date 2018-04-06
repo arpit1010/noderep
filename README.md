@@ -9,4 +9,4 @@ THe application is useful for various Front end recruitment assignments which ar
 Can be enhanced easily for using it with mongodb
  To run just write the below command on your terminal console
  
- "node server.js"
+ "node server/index.js"
